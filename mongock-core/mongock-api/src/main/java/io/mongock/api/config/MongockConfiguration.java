@@ -82,6 +82,11 @@ public class MongockConfiguration implements ExecutorConfiguration {
   private boolean trackIgnored = false;
 
   /**
+   * If true, will log some events with DEBUG level
+   */
+  private boolean silentLogging = false;
+
+  /**
    * If false, will disable Mongock. Default true
    */
   private boolean enabled = true;
@@ -175,6 +180,7 @@ public class MongockConfiguration implements ExecutorConfiguration {
     lockTryFrequencyMillis = from.getLockTryFrequencyMillis();
     throwExceptionIfCannotObtainLock = from.isThrowExceptionIfCannotObtainLock();
     trackIgnored = from.isTrackIgnored();
+    silentLogging = from.isSilentLogging();
     enabled = from.isEnabled();
     migrationScanPackage = from.getChangeLogsScanPackage();
     startSystemVersion = from.getStartSystemVersion();
@@ -265,6 +271,14 @@ public class MongockConfiguration implements ExecutorConfiguration {
 
   public void setTrackIgnored(boolean trackIgnored) {
     this.trackIgnored = trackIgnored;
+  }
+
+  public boolean isSilentLogging() {
+    return silentLogging;
+  }
+
+  public void setSilentLogging(boolean silentLogging) {
+    this.silentLogging = silentLogging;
   }
 
   public boolean isThrowExceptionIfCannotObtainLock() {
@@ -383,6 +397,7 @@ public class MongockConfiguration implements ExecutorConfiguration {
         lockTryFrequencyMillis == that.lockTryFrequencyMillis &&
         throwExceptionIfCannotObtainLock == that.throwExceptionIfCannotObtainLock &&
         trackIgnored == that.trackIgnored &&
+        silentLogging == that.silentLogging &&
         enabled == that.enabled &&
         lockGuardEnabled == that.lockGuardEnabled &&
         Objects.equals(migrationRepositoryName, that.migrationRepositoryName) &&
@@ -401,7 +416,7 @@ public class MongockConfiguration implements ExecutorConfiguration {
 
   @Override
   public int hashCode() {
-    return Objects.hash(migrationRepositoryName, indexCreation, lockRepositoryName, lockAcquiredForMillis, lockQuitTryingAfterMillis, lockTryFrequencyMillis, throwExceptionIfCannotObtainLock, trackIgnored, enabled, migrationScanPackage, startSystemVersion, endSystemVersion, serviceIdentifier, metadata, legacyMigration, transactionEnabled, maxTries, maxWaitingForLockMillis, lockGuardEnabled);
+    return Objects.hash(migrationRepositoryName, indexCreation, lockRepositoryName, lockAcquiredForMillis, lockQuitTryingAfterMillis, lockTryFrequencyMillis, throwExceptionIfCannotObtainLock, trackIgnored, silentLogging, enabled, migrationScanPackage, startSystemVersion, endSystemVersion, serviceIdentifier, metadata, legacyMigration, transactionEnabled, maxTries, maxWaitingForLockMillis, lockGuardEnabled);
   }
 
   //DEPRECATIONS

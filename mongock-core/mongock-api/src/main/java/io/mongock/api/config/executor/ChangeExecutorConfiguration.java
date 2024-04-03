@@ -13,6 +13,8 @@ public interface ChangeExecutorConfiguration {
 
   boolean isTrackIgnored();
 
+  boolean isSilentLogging();
+
   Optional<Boolean> getTransactionEnabled();
   
   TransactionStrategy getTransactionStrategy();

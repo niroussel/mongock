@@ -326,7 +326,11 @@ public abstract class ChangeExecutorBase<CONFIG extends ChangeExecutorConfigurat
   }
   
   protected void logIgnoredChangeSet(ChangeSetItem changeSetItem) {
-    logger.info("PASSED OVER - {}", changeSetItem.toPrettyString());
+    if (config.isSilentLogging()) {
+      logger.debug("PASSED OVER - {}", changeSetItem.toPrettyString());
+    } else {
+      logger.info("PASSED OVER - {}", changeSetItem.toPrettyString());
+    }
   }
   
   protected void logIgnoredChangeLogs(Collection<ChangeLogItem> changeLogs) {
